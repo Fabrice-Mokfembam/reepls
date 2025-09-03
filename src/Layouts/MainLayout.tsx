@@ -26,10 +26,13 @@ export const MainLayout = () => {
     <div className="relative min-h-screen">
       <div className="relative grid grid-cols-[auto_1fr]">
         {/* Sidebar Component */}
-        <Sidebar screenSize={screenSize} />
+        <div>
+   <Sidebar screenSize={screenSize} />
+        </div>
+     
 
         {/* Main Content */}
-        <main className="flex-1 min-h-screen">
+        <main className="w-full min-h-screen">
           <Outlet />
         </main>
       </div>

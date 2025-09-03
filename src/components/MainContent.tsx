@@ -10,7 +10,7 @@ export const MainContent: React.FC<MainContentProps> = ({ children }) => {
 
 
   return (
-    <div className='w-full bg-background'>
+    <div className='w-full '>
       {children}
 
       {/* {(screenSize === 'sm' || screenSize === 'md') && ( */}

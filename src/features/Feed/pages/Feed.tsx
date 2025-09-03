@@ -1,11 +1,27 @@
 import { MainContent } from "../../../components/MainContent";
 import { RightBar } from "../../../components/RightBar";
+import Topbar from "../../../components/Topbar";
+import Tabs from "../../../components/Tabs";
+import { useState } from "react";
 
 export const Feed = () => {
+  const [activeTab, setActiveTab] = useState('for_you');
   return (
-    <div className="lg:grid grid-cols-[4fr_1.65fr]">
+    <div className="w-full lg:grid grid-cols-[4fr_1.65fr]">
       {/* Main Content */}
       <MainContent>
+        <Topbar>
+          <Tabs
+            tabs={[
+              { id: 'for_you', title: 'For You' },
+              { id: 'following', title: 'Following' },
+              { id: 'podcast', title: 'Podcast' },
+            ]}
+            activeTab={activeTab}
+            setActiveTab={(tabId) => setActiveTab(String(tabId))}
+           
+          />
+        </Topbar>
   <div className="flex-1">
         <h1 className="text-2xl font-bold mb-4">Feed</h1>
         <div className="space-y-4">
