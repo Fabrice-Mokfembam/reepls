@@ -5,7 +5,7 @@ const WelcomeScreen: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center text-foreground">
       <h1 className="text-4xl font-bold mb-8 text-neutral-800">Welcome, this is SAAH</h1>
-      <Link to="/auth/signin" className="w-96 cursor-pointer px-6 py-3 border border-neutral-50 text-neutral-50 rounded-full hover:bg-neutral-100 transition-colors text-center">
+      <Link to="/auth/signin/email" className="w-96 cursor-pointer px-6 py-3 border border-neutral-50 text-neutral-50 rounded-full hover:bg-neutral-100 transition-colors text-center">
         Sign in
       </Link>
       <div className="flex items-center w-96 my-4">
