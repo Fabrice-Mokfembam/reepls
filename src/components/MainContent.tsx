@@ -3,6 +3,7 @@ import { Home, Search, PlusCircle, Bookmark, User, Pencil, Mic } from 'lucide-re
 import { Link, useNavigate } from 'react-router-dom';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { toast } from 'react-toastify';
+import { useCurrentUser } from '../features/Auth/hooks/useCurrentUser';
 
 interface MainContentProps {
   children: React.ReactNode;
@@ -11,9 +12,10 @@ interface MainContentProps {
 export const MainContent: React.FC<MainContentProps> = ({ children }) => {
   const navigate = useNavigate();
   const [isCreatingPost, setIsCreatingPost] = useState(false);
+  const {user} = useCurrentUser();
 
   return (
-    <div className='w-full'>
+    <div className='w-full bg-neutral-800 min-h-screen'>
       {children}
 
       {/* Mobile Bottom Navigation */}
@@ -87,7 +89,7 @@ export const MainContent: React.FC<MainContentProps> = ({ children }) => {
           <Bookmark size={24} />
           <span className="text-xs mt-1">Saved</span>
         </Link>
-        <Link to="/profile" className="flex flex-col items-center text-neutral-100 hover:text-primary-500">
+        <Link to={`/profile/${user?.username}`} className="flex flex-col items-center text-neutral-100 hover:text-primary-500">
           <User size={24} />
           <span className="text-xs mt-1">Profile</span>
         </Link>

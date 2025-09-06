@@ -27,7 +27,7 @@ export const appRoutes = {
       element: <Notifications />
     },
     {
-      path: '/profile',
+      path: '/profile/:username',
       element: <Profile />
     }
   ]

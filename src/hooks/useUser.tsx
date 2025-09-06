@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import type { User } from '../models/datamodels'; 
-import { AuthContext } from '../Context/AuthContext/authContext';
+import { useCurrentUser } from '../features/Auth/hooks/useCurrentUser';
 
 
 export const useUser = () => {
-  const { user, isLoggedIn, logout } = useContext(AuthContext);
+  const { user, isAuthenticated, logout } = useCurrentUser()
 
   return {
     authUser: user as User , 
-    isLoggedIn,
+    isLoggedIn:isAuthenticated,
     logout,
   };
 };

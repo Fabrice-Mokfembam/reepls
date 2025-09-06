@@ -27,12 +27,12 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, borderBottom
 
   return ( 
     <div className="flex flex-col items-center backdrop-blur-sm"> 
-      <div ref={tabRef} className={`relative flex w-full ${borderBottom ? 'border-b border-neutral-300' : ''}`}> 
+      <div ref={tabRef} className={`relative flex items-center w-full ${borderBottom ? 'border-b border-neutral-300' : ''}`}> 
         {tabs.map((tab) => ( 
           <span 
             key={tab.id} 
             id={`tab-${tab.id}`} 
-            className={`relative w-full px-2 py-2 cursor-pointer transition-all duration-300 line-clamp-1 flex items-center justify-center ${ 
+            className={`relative  w-full px-2 py-2 cursor-pointer transition-all duration-300 line-clamp-1 flex items-center justify-center ${ 
               activeTab === tab.id 
                 ? 'text-neutral-50' 
                 : 'text-neutral-400' 

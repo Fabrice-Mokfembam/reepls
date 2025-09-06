@@ -3,9 +3,18 @@ import { RightBar } from "../../../components/RightBar";
 import Topbar from "../../../components/Topbar";
 import Tabs from "../../../components/Tabs";
 import { useState } from "react";
+import AuthorSuggestionsList from "../../Profile/components/AuthorSuggestions";
+import PostCard from "../../Blog/components/PostsArticleCards/PostCard";
+import ArticleCard from "../../Blog/components/PostsArticleCards/ArticleCard";
+import PostCardCommentary from "../../Blog/components/PostsArticleCards/PostCardCommentary";
+import PostCardNoCommentary from "../../Blog/components/PostsArticleCards/PostCardNoCommentary";
+import ArticleCardCommentary from "../../Blog/components/PostsArticleCards/ArticleCardCommentary";
+import ArticleCardNoCommentary from "../../Blog/components/PostsArticleCards/ArticleCardNoCommentary";
+
 
 export const Feed = () => {
   const [activeTab, setActiveTab] = useState('for_you');
+
   return (
     <div className="w-full lg:grid grid-cols-[4fr_1.65fr]">
       {/* Main Content */}
@@ -22,24 +31,21 @@ export const Feed = () => {
            
           />
         </Topbar>
-  <div className="flex-1">
-        <h1 className="text-2xl font-bold mb-4">Feed</h1>
-        <div className="space-y-4">
-          <div className="p-4 border border-neutral-700 rounded-lg">
-            <h2 className="text-lg font-semibold">Welcome to Your Feed</h2>
-            <p className="text-neutral-400 mt-2">
-              Here you'll see reepls from people you follow and recommended content.
-            </p>
-          </div>
-        </div>
+     <div className="w-full max-w-full flex flex-col gap-16 sm:max-w-3xl mx-auto px-4 sm:px-6 my-8">
+        <ArticleCardCommentary/>
+        <ArticleCardNoCommentary/>
+        <PostCard/>
+        <ArticleCard/>
+        <PostCardNoCommentary/>
+        <PostCard/>
+        <PostCardCommentary/>
       </div>
       </MainContent>
     
 
       {/* Right Sidebar */}
       <RightBar>
-  <h2 className="text-lg font-semibold mb-2">Sidebar</h2>
-        <p className="text-neutral-400">Some content goes here...</p>
+        <AuthorSuggestionsList/>
       </RightBar>
       
     </div>

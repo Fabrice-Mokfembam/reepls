@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { CodeVerify, EmailCode, LoginResponse, PhoneCode, PhoneVerify, User } from '../../../models/datamodels';
@@ -17,13 +16,12 @@ import {
   logoutUser,
   logOutWithGoogle,
 } from "../API";
-import { useEncryptedAuth } from './useEncryptedAuth';
-import { AuthContext } from '../../../Context/AuthContext/authContext';
+import { useCurrentUser } from './useCurrentUser';
 
 
 // Hook for registering a user with email
 export const useRegisterUser = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useCurrentUser();
 
 
   return useMutation({
@@ -59,7 +57,7 @@ export const useLogOutUserWithGoogle = () => {
 
 // Hook for registering a user with phone number
 export const usePhoneRegisterUser = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useCurrentUser();
 
   return useMutation({
     mutationFn: (user: User) => registerUser(user),
@@ -74,20 +72,20 @@ export const usePhoneRegisterUser = () => {
 
 // Hook for logging in a user with email
 export const useLoginUser = () => {
-  const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+//   const navigate = useNavigate();
+//   const { login } = useContext(AuthContext);
 
-  const navigateToFeed = () => {
-    navigate('/feed');
-  };
+//   const navigateToFeed = () => {
+//     navigate('/feed');
+//   };
 
   return useMutation({
     mutationFn: (user: User) => loginUser(user),
-    onSuccess: (data: LoginResponse) => {
+    // onSuccess: (data: LoginResponse) => {
       
-      login(data); // Pass the full LoginResponse to encrypt and store
-      navigateToFeed();
-    },
+    //   login(data); // Pass the full LoginResponse to encrypt and store
+    //   navigateToFeed();
+    // },
     onError: (error) => {
      void error;
     },
@@ -97,7 +95,7 @@ export const useLoginUser = () => {
 // Hook for logging in a user with phone
 export const useLoginUserWithPhone = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login } = useCurrentUser();
 
   const navigateToFeed = () => {
     navigate('/feed');
@@ -180,10 +178,10 @@ export const useVerifyPhoneCode = () => {
 
 // Hook for refrehing the token
 export const useRefreshToken = () => {
-  const {refreshToken  } = useEncryptedAuth();
+  const {refreshTokenString  } = useCurrentUser();
 
   return useMutation({
-    mutationFn: () => refreshAuthTokens(refreshToken!),
+    mutationFn: () => refreshAuthTokens(refreshTokenString!),
     onSuccess: () => {
     },
     onError: (error) => {

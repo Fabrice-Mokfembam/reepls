@@ -6,6 +6,7 @@ import { useTheme } from '../Context/ThemeContext/themeContext';
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useCurrentUser } from '../features/Auth/hooks/useCurrentUser';
 
 type SidebarProps = {
   screenSize: 'sm' | 'md' | 'lg';
@@ -18,13 +19,14 @@ export const Sidebar = ({ screenSize }: SidebarProps) => {
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [isCreatingPost, setIsCreatingPost] = useState(false);
+  const {user } = useCurrentUser()
 
   const navLinks = [
     { icon: Home, name: 'Feed', link: '/feed', hasNotifications: false },
     { icon: Search, name: 'Search', link: '/search', hasNotifications: false },
     { icon: Bookmark, name: 'Saved', link: '/saved', hasNotifications: false },
     { icon: Bell, name: 'Notifications', link: '/notifications', hasNotifications: true },
-    { icon: UserCircle2, name: 'Profile', link: '/profile', hasNotifications: false },
+    { icon: UserCircle2, name: 'Profile', link:`/profile${user?.username }`, hasNotifications: false },
   ];
 
   const responsivesize = window.innerWidth >= 769 && window.innerWidth <= 1023;
@@ -95,14 +97,14 @@ export const Sidebar = ({ screenSize }: SidebarProps) => {
                 } ${isOpen ? '' : 'justify-center'}`}
               >
                 <div className='relative'>
-                  <item.icon size={24} className={`transition-colors duration-200`} />
+                  <item.icon size={20} className={`transition-colors duration-200`} />
                   {item.hasNotifications && item.name === 'Notifications' && (
                     <span className="absolute top-0 right-0 text-[13px] flex justify-center items-center -mt-3 -mr-3 size-6 text-white rounded-full bg-red-500">9</span>
                   )}
                 </div>
                 {isOpen && (
                   <span
-                    className="ml-4 whitespace-nowrap transition-all duration-300 md:hidden lg:block overflow-hidden"
+                    className="ml-4 text-[14px] text-neutral-100 whitespace-nowrap transition-all duration-300 md:hidden lg:block overflow-hidden"
                     style={{
                       maxWidth: screenSize === 'lg' && isOpen ? '12vw' : '0',
                     }}

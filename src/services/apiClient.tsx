@@ -2,13 +2,9 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { toast } from 'react-toastify';
 import { API_URL, STORAGE_KEY } from '../constants';
-import {
-  decryptLoginData,
-  encryptAndStoreLoginData,
-  getDecryptedAccessToken,
-  getDecryptedRefreshToken,
-} from '../features/Auth/API/Encryption';
+
 import { refreshAuthTokens } from '../features/Auth/API';
+import { getAccessTokenString, getLoginData,  getRefreshTokenString, storeLoginData } from '../features/Auth/utils';
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_URL,
@@ -20,7 +16,7 @@ const apiClient: AxiosInstance = axios.create({
 // Request interceptor to add Authorization header
 apiClient.interceptors.request.use(
   (config) => {
-    const token = getDecryptedAccessToken();
+    const token = getAccessTokenString();
 
     if (token && !config.url?.includes('/login') && !config.url?.includes('/register')) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -39,14 +35,14 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const refreshToken = getDecryptedRefreshToken(); // Use the decrypted refresh token
+      const refreshToken = getRefreshTokenString(); // Use the decrypted refresh token
       if (refreshToken) {
         try {
           const data = await refreshAuthTokens(refreshToken);
           if (!data.accessToken) throw new Error('No access token received');
 
           // Decrypt the existing login data to update it
-          const decryptedData = decryptLoginData();
+          const decryptedData = getLoginData();
           if (!decryptedData) throw new Error('No login data found');
 
           // Update the tokens in the decrypted data
@@ -54,7 +50,7 @@ apiClient.interceptors.response.use(
           decryptedData.tokens.refresh.token = data.refreshToken;
 
           // Re-encrypt and store the updated login data
-          encryptAndStoreLoginData(decryptedData);
+          storeLoginData(decryptedData);
 
           // Update headers before retrying the request
           originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
@@ -86,7 +82,7 @@ const apiClient1: AxiosInstance = axios.create({
 // Request interceptor to add Authorization header
 apiClient1.interceptors.request.use(
   (config) => {
-    const token = getDecryptedAccessToken(); // Use the decrypted access token
+    const token = getAccessTokenString(); // Use the decrypted access token
 
     if (token && !config.url?.includes('/login') && !config.url?.includes('/register')) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -105,14 +101,14 @@ apiClient1.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const refreshToken = getDecryptedRefreshToken(); 
+      const refreshToken = getRefreshTokenString(); 
       if (refreshToken) {
         try {
           const data = await refreshAuthTokens(refreshToken);
           if (!data.accessToken) throw new Error('No access token received');
 
           // Decrypt the existing login data to update it
-          const decryptedData = decryptLoginData();
+          const decryptedData = getLoginData();
           if (!decryptedData) throw new Error('No login data found');
 
           // Update the tokens in the decrypted data
@@ -120,7 +116,7 @@ apiClient1.interceptors.response.use(
           decryptedData.tokens.refresh.token = data.refreshToken;
 
           // Re-encrypt and store the updated login data
-          encryptAndStoreLoginData(decryptedData);
+          storeLoginData(decryptedData);
 
           // Update headers before retrying the request
           originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;

@@ -14,6 +14,8 @@ import logo from '/LogoDark.svg?url'
 import imagePlaceholder from './profileimageplacehloder.png'
 import bannerPlaceholder from './bannerPlaceholder.jpg'
 import podcastimg from './podcast.png'
+import banner from './defaultbanner.png'
+import profile from './defaultprofile.png'
 
 
 export const Pics = {
@@ -32,5 +34,7 @@ export const Pics = {
     logo,
     imagePlaceholder,
     bannerPlaceholder,
-    podcastimg
+    podcastimg,
+    banner,
+    profile
 }

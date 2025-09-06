@@ -64,7 +64,7 @@ const EmailCodeCheckResend: React.FC = () => {
   return (
     
       <div className="flex flex-col items-center justify-center min-h-screen  p-4">
-        <div className="w-full max-w-lg p-8 ">
+        <div className="w-full  max-w-lg p-8 ">
           <h1 className="text-3xl font-bold text-neutral-50 mb-2">Check your mail</h1>
           <p className="text-md text-gray-600 mb-6">We have sent a six-digit code to your email. Input the code here</p>
 
@@ -79,7 +79,7 @@ const EmailCodeCheckResend: React.FC = () => {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 onPaste={handlePaste}
                 ref={(el: HTMLInputElement | null) => { inputRefs.current[index] = el as HTMLInputElement; }}
-                className="w-16 h-18 text-center text-2xl font-bold border-2 border-primary-400 rounded-lg focus:outline-none focus:border-primary-500 bg-primary-700 text-primary-200"
+                className="w-10 h-12 sm:w-16 sm:h-18 text-center text-2xl font-bold border-2 border-primary-400 rounded-lg focus:outline-none focus:border-primary-500 bg-primary-700 text-primary-200"
               />
             ))}
           </div>
