@@ -19,9 +19,6 @@ const {theme} = useTheme()
     <>
 
       <RouterProvider router={router} />
-      
-      
-      
       <ToastContainer
         position="top-right" 
         autoClose={5000} 

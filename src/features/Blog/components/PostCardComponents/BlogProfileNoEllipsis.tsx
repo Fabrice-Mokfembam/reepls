@@ -1,8 +1,12 @@
 import { CheckCircle } from 'lucide-react'
 import React from 'react'
 import avatarSrc from '../../../../assets/images/maleAuth.png'
+import type { Article } from '../../../../models/datamodels'
+interface Articleprobs{
+  article: Article
+}
 
-const BlogProfileNoEllipsis:React.FC = () => {
+const BlogProfileNoEllipsis:React.FC<Articleprobs> = ({article}) => {
     
 
   return (

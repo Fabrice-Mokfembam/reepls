@@ -1,7 +1,12 @@
 import React from 'react';
 import {  ThumbsUp, MessageSquare, Repeat } from 'lucide-react';
+import type { Article } from '../../../../models/datamodels';
 
-const BlogReactionSection:React.FC = () => {
+interface Articleprobs{
+  article: Article
+}
+
+const BlogReactionSection:React.FC<Articleprobs> = ({article}) => {
   return (
     <div className="flex items-center text-neutral-50 justify-between py-5 border-t border-gray-200">
       {/* React Button */}

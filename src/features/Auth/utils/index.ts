@@ -209,3 +209,47 @@ export const isVerifiedWriter = (): boolean => {
     return false;
   }
 };
+
+/**
+ * Updates the username in the encrypted LoginResponse stored in secureLocalStorage.
+ * @param newUsername - The new username to set.
+ * @returns boolean - True if successful, false otherwise.
+ */
+export const updateUsernameInSecureStorage = (newUsername: string): boolean => {
+  try {
+    // 1. Retrieve current login data
+    const loginDataString = secureLocalStorage.getItem(LOGIN_DATA_KEY);
+    if (!loginDataString) {
+      return false;
+    }
+
+    // 2. Parse JSON string to LoginResponse object
+    const loginData: LoginResponse = JSON.parse(loginDataString as string);
+
+    if (!loginData.user) {
+      throw new Error('User data not found in login response');
+    }
+
+    // 3. Update username
+    const updatedUser: User = {
+      ...loginData.user,
+      username: newUsername,
+    };
+
+    const updatedLoginData: LoginResponse = {
+      ...loginData,
+      user: updatedUser,
+    };
+
+    // 4. Save updated login data back securely as JSON string
+    secureLocalStorage.setItem(LOGIN_DATA_KEY, JSON.stringify(updatedLoginData));
+
+    // 5. Also update separate user entry for consistency if used elsewhere
+    secureLocalStorage.setItem('userData', JSON.stringify(updatedUser));
+
+    return true;
+  } catch (error) {
+    console.error('Error updating username in secure storage:', error);
+    return false;
+  }
+};

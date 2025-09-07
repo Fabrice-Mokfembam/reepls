@@ -15,7 +15,7 @@ export const MainContent: React.FC<MainContentProps> = ({ children }) => {
   const {user} = useCurrentUser();
 
   return (
-    <div className='w-full bg-neutral-800 min-h-screen'>
+    <div className='w-full bg-neutral-800 min-h-screen pb-14'>
       {children}
 
       {/* Mobile Bottom Navigation */}

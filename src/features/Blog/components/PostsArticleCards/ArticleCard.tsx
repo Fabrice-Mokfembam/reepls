@@ -2,49 +2,41 @@ import React from "react";
 import BlogProfile from "../PostCardComponents/BlogProfile";
 import BlogMessage from "../PostCardComponents/BlogMessage";
 import BlogImagery from "../PostCardComponents/BlogImageSection";
-import images from "../../../../assets/images/femaleAuth.png";
 import BlogArticleReactionStats from "../PostCardComponents/BlogArticleReactionStats";
+import type { Article } from "../../../../models/datamodels";
+import { LucideMic } from "lucide-react";
+import { calculateReadTime } from "../../../../utils/articles";
 
-const article = {
-  id: "1",
-  title: "My Blog Post",
-  content: "This is the content of my blog post...",
-  thumbnail: "https://example.com/thumbnail.jpg",
-  // ... other article properties
-};
+interface ArticleCardprobs {
+  article: Article;
+}
 
-const media = [
-  {
-    url: images,
-    type: "image" as const,
-  },
-  {
-    url: images,
-    type: "image" as const,
-  },
-  {
-    url: images,
-    type: "video" as const,
-  },
-];
-
-const ArticleCard: React.FC = () => {
-    const isCognitiveMode = false
+const ArticleCard: React.FC<ArticleCardprobs> = ({ article }) => {
+  const isCognitiveMode = false;
   return (
     <div className="w-full max-w-full sm:max-w-6xl mx-auto px-4 sm:px-6 bg-background shadow-sm rounded-md">
-      <BlogProfile />
+      <BlogProfile article={article} />
       <div>
-        {isCognitiveMode &&  <BlogImagery media={media} article={article} />}
-        <BlogMessage
-        title="Advanced React Patterns"
-        content="When building React applications, you'll encounter situations where you need to share state between multiple components. In this article, we'll explore various advanced patterns like render props, higher-order components, and the compound component pattern. We'll also discuss when to use each pattern and their trade-offs. By the end of this article, you'll have a better understanding of how to structure complex React applications."
-        isArticle={false}
-      />
-      <div className="text-neutral-50 py-4 text-[14px]">4 mins Read</div>
+        {isCognitiveMode && article?.media && (
+          <BlogImagery media={article?.media} article={article} />
+        )}
+        <BlogMessage article={article} />
+        <div className="flex py-3 gap-1 items-center">
+          {article.hasPodcast && (
+            <>
+              <button>
+                <LucideMic size={18} />
+              </button>
+              <div className="size-1 rounded-full bg-primary-400"></div>
+            </>
+          )}
+          <div className="text-neutral-50 py-4 text-[13px] sm:text-[14px]">
+            {calculateReadTime(article.content!, article.media || [])} mins Read
+          </div>
+        </div>
       </div>
-     
-      <BlogArticleReactionStats/>
-      
+
+      <BlogArticleReactionStats article={article} />
     </div>
   );
 };

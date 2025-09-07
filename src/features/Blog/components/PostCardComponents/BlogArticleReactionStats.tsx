@@ -5,8 +5,12 @@ import {
   Bookmark,
   Radio,
 } from "lucide-react";
+import type { Article } from '../../../../models/datamodels';
+interface Articleprobs{
+  article: Article
+}
 
-const BlogArticleReactionStats:React.FC = () => {
+const BlogArticleReactionStats:React.FC<Articleprobs> = ({article}) => {
   return (
     <div className="flex items-center justify-between py-5 mt-2">
       {/* React Button */}

@@ -26,7 +26,7 @@ export const Sidebar = ({ screenSize }: SidebarProps) => {
     { icon: Search, name: 'Search', link: '/search', hasNotifications: false },
     { icon: Bookmark, name: 'Saved', link: '/saved', hasNotifications: false },
     { icon: Bell, name: 'Notifications', link: '/notifications', hasNotifications: true },
-    { icon: UserCircle2, name: 'Profile', link:`/profile${user?.username }`, hasNotifications: false },
+    { icon: UserCircle2, name: 'Profile', link:`/profile/${user?.username }`, hasNotifications: false },
   ];
 
   const responsivesize = window.innerWidth >= 769 && window.innerWidth <= 1023;

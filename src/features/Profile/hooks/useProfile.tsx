@@ -67,6 +67,30 @@ export const useUpdateUser = (): {
   });
   return { mutate, isPending, error, isError, isSuccess };
 };
+// Hook for updating a user
+export const useUpdateUser2 = (): {
+  mutate: (user: User) => void;
+  isPending: boolean;
+  error: Error | null;
+  isError: boolean;
+  isSuccess: boolean;
+} => {
+  const queryClient = useQueryClient();
+  
+
+  const { mutate, isPending, error, isError, isSuccess } = useMutation({
+    mutationFn: (user: User) => updateUser(user),
+    onSuccess: () => {
+    
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+     
+    },
+    onError: (error) => {
+      void error;
+    },
+  });
+  return { mutate, isPending, error, isError, isSuccess };
+};
 
 // Hook for deleting a user
 export const useDeleteUser = (): {

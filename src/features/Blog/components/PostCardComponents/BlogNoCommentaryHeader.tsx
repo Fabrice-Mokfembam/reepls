@@ -1,7 +1,13 @@
 import { EyeIcon, MoreVertical, UserPlus, X } from 'lucide-react';
 import React, { useState } from 'react'
+import type { Article } from '../../../../models/datamodels';
 
-const BlogNoCommentaryHeader:React.FC = () => {
+interface Articleprobs{
+  article: Article
+}
+
+
+const BlogNoCommentaryHeader:React.FC<Articleprobs> = ({article}) => {
 const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const handleEllipsisClick = () => {

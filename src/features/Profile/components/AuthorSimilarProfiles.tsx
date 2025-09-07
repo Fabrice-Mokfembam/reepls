@@ -5,7 +5,7 @@ import { useGetRecommendedUsersById } from '../hooks/useProfile';
 import { useCurrentUser } from '../../Auth/hooks/useCurrentUser';
 import ProfileRightBarLoader from './ProfileRightBarLoader';
 
-const AuthorSuggestionsList: React.FC = () => {
+const AuthorSimilarProfiles: React.FC = () => {
   const { user: authUser } = useCurrentUser();
 
   const {
@@ -81,4 +81,4 @@ const AuthorSuggestionsList: React.FC = () => {
   );
 };
 
-export default AuthorSuggestionsList;
+export default AuthorSimilarProfiles;

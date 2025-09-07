@@ -1,18 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '../../../../utils'
 import { t } from 'i18next'
+import type { Article } from '../../../../models/datamodels'
 
 
 interface BlogMessageProps {
-  title: string
-  content: string
-  isArticle?: boolean
+ article:Article
 }
 
 const BlogMessage: React.FC<BlogMessageProps> = ({ 
-  title, 
-  content, 
-  isArticle = false, 
+ article 
   
 }) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -35,11 +32,11 @@ const BlogMessage: React.FC<BlogMessageProps> = ({
       
       setShowToggle(contentHeight > threeLinesHeight)
     }
-  }, [content])
+  }, [article?.content])
 
   return (
     <div className="blog-message">
-      <div className="text-[15px] text-neutral-50 font-semibold mb-2">{title}</div>
+      <div className="text-[15px] text-neutral-50 font-semibold mb-2">{article?.title}</div>
       <p
         ref={contentRef}
         className={cn(
@@ -48,9 +45,9 @@ const BlogMessage: React.FC<BlogMessageProps> = ({
           'whitespace-pre-wrap'
         )}
       >
-        {content}
+        {article?.content}
       </p>
-      {isArticle ? (
+      {article?.isArticle ? (
         <button
           onClick={handleToggle}
           disabled={hasClicked}

@@ -1,26 +1,14 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-
-// Define types locally
-type MediaType = 'image' | 'video'
-
-interface MediaItem {
-  url: string;
-  type: MediaType;
-  alt?: string;
-}
-
-interface Article {
-  id: string;
-  title: string;
-  content: string;
-  thumbnail?: string;
-}
+import type { Article, MediaItem } from '../../../../models/datamodels';
 
 interface BlogImageryProps {
   media: MediaItem[];
   article: Article;
 }
+
+
+
 
 const BlogImagery: React.FC<BlogImageryProps> = ({ media, article }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

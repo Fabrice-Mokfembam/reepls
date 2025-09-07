@@ -1,7 +1,12 @@
 
+import type React from "react";
 import { heart, thumb, clap } from "../../../../assets/icons";
+import type { Article } from "../../../../models/datamodels";
+interface Articleprobs{
+  article: Article
+}
 
-const BlogReactionStats = () => {
+const BlogReactionStats:React.FC<Articleprobs> = ({article}) => {
   return (
   <div className="flex items-center justify-between py-5">
       {/* React Button */}

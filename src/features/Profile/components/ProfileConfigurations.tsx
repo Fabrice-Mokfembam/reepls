@@ -44,7 +44,7 @@ const ProfileConfigurations:React.FC = () => {
   };
 
   return (
-    <div className="p-4 flex flex-col">
+    <div className="p-4 flex flex-col sticky top-0">
       <h2 className="text-xl text-neutral-100 font-semibold mb-4">Settings</h2>
       <div className='flex-1 flex flex-col gap-6 mt-4'>
         <ConfigurationWrapper>

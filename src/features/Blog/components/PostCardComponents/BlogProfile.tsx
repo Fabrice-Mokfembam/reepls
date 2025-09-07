@@ -1,8 +1,14 @@
 import { CheckCircle, EyeIcon, MoreVertical, UserPlus, X } from 'lucide-react'
 import React, { useState } from 'react'
 import avatarSrc from '../../../../assets/images/maleAuth.png'
+import type { Article } from '../../../../models/datamodels'
+import { timeAgo } from '../../../../utils/dateFormater'
 
-const BlogProfile:React.FC = () => {
+interface Articleprobs{
+  article: Article
+}
+
+const BlogProfile:React.FC<Articleprobs> = ({article}) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const handleEllipsisClick = () => {
         setIsPopupOpen(!isPopupOpen);
@@ -14,12 +20,12 @@ const BlogProfile:React.FC = () => {
         <img src={avatarSrc} alt="Avatar" className="w-12 h-12 rounded-full" />
         <div className='flex flex-col '>
           <div className="flex items-center gap-1">
-            <span className="font-semibold text-neutral-50">STARUTH</span>
-            {<CheckCircle size={16} className="text-primary-400" />}
+            <span className="font-semibold text-neutral-50 text-[15px] sm:text-[16px]">{article?.author_id?.name}</span>
+            { article.author_id?.is_verified_writer &&  <CheckCircle size={16} className="text-primary-400" />}
             <span className="text-primary-400 px-2 text-sm">following</span>
           </div>
-          <p className="text-neutral-100 text-sm">Web Developer</p>
-          <p className="text-neutral-200 text-sm">6 days ago</p>
+          <p className="text-neutral-100 text-sm text-[14px] sm:text-[15px]">{article.author_id?.bio}</p>
+          <p className="text-neutral-200 text-sm text-[14px] sm:text-[15px]">{timeAgo(article.createdAt || '')}</p>
         </div>
       </div>
       <div className="relative">

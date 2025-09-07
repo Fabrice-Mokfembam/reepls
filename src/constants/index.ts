@@ -1,6 +1,8 @@
 // import config from '../config';
 
-import config from '../Config';
+import config from "../Config";
+
+
 
 const MAX_IMAGE_COUNT = 10;
 const MAX_VIDEO_COUNT = 4;
@@ -44,8 +46,8 @@ const allowedVideoTypes = [
 ];
 
 // All about the api
-// const API_BASE_URL = config.api.baseUrl;
-const API_BASE_URL = "https://reepls-api-development.onrender.com";
+const API_BASE_URL = config.api.baseUrl;
+// const API_BASE_URL = "https://reepls-api-development.onrender.com";
 const API_VERSION = config.api.version || '/api-v1';
 const API_URL = `${API_BASE_URL}${API_VERSION}`;
 
