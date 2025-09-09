@@ -88,7 +88,7 @@ export const Feed = () => {
 
           {/* Articles/Posts rendering */}
           {data?.pages.map((page, i) => (
-            <div className="flex flex-col gap-7" key={i}>
+            <div className="flex flex-col gap-12" key={i}>
               {page.articles.map((article: Article) => {
                 const isArticle = article.isArticle;
                 const hasRepost = !!article.repost;

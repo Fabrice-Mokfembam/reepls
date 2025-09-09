@@ -24,8 +24,8 @@ const ArticleCard: React.FC<ArticleCardprobs> = ({ article }) => {
         <div className="flex py-3 gap-1 items-center">
           {article.hasPodcast && (
             <>
-              <button>
-                <LucideMic size={18} />
+              <button className="p-2 rounded-full bg-primary-500">
+                <LucideMic size={18} className="text-white" />
               </button>
               <div className="size-1 rounded-full bg-primary-400"></div>
             </>

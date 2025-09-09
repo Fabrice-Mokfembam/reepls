@@ -151,7 +151,7 @@ const BlogImagery: React.FC<BlogImageryProps> = ({ media, article }) => {
                 {mediaItem.type === 'image' ? (
                   <img
                     src={mediaItem.url}
-                    alt={mediaItem.alt || `Blog visual ${index + 1}`}
+                    alt={ `Blog visual ${index + 1}`}
                     className="h-full w-full object-cover"
                     loading="lazy"
                     onLoad={handleImageLoad}
@@ -236,7 +236,7 @@ const BlogImagery: React.FC<BlogImageryProps> = ({ media, article }) => {
                     {mediaItem.type === 'image' ? (
                       <img
                         src={mediaItem.url}
-                        alt={mediaItem.alt || `Blog visual ${index + 1}`}
+                        alt={`Blog visual ${index + 1}`}
                         className="max-h-full max-w-full object-contain"
                       />
                     ) : (

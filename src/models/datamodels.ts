@@ -193,6 +193,9 @@ export interface Comment {
   is_audio_comment?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  
+targetId?:string;
+targetType?:string;
   replies?: Comment[];
   _id?: string;
   author?: User;
