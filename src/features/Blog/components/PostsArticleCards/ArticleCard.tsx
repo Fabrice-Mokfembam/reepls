@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogProfile from "../PostCardComponents/BlogProfile";
 import BlogMessage from "../PostCardComponents/BlogMessage";
 import BlogImagery from "../PostCardComponents/BlogImageSection";
@@ -7,12 +7,24 @@ import type { Article } from "../../../../models/datamodels";
 import { LucideMic } from "lucide-react";
 import { calculateReadTime } from "../../../../utils/articles";
 
+
 interface ArticleCardprobs {
   article: Article;
 }
 
 const ArticleCard: React.FC<ArticleCardprobs> = ({ article }) => {
   const isCognitiveMode = false;
+
+  
+
+    const [isCommentSectionOpen, setIsCommentSectionOpen] = useState<boolean>(false);
+
+  const openComments = () => setIsCommentSectionOpen(true);
+
+  const closeComments = () => setIsCommentSectionOpen(false);
+
+  const toggleComments = () => setIsCommentSectionOpen(prev => !prev);
+
   return (
     <div className="w-full max-w-full sm:max-w-6xl mx-auto px-4 sm:px-6 bg-background shadow-sm rounded-md">
       <BlogProfile article={article} />
@@ -36,7 +48,12 @@ const ArticleCard: React.FC<ArticleCardprobs> = ({ article }) => {
         </div>
       </div>
 
-      <BlogArticleReactionStats article={article} />
+      <BlogArticleReactionStats 
+        openComments={openComments}
+        closeComments={closeComments}
+        toggleComments={toggleComments}
+        isCommentSectionOpen={isCommentSectionOpen}
+        article={article} />
     </div>
   );
 };

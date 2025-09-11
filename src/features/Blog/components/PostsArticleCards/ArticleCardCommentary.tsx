@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogMessage from "../PostCardComponents/BlogMessage";
 import BlogImagery from "../PostCardComponents/BlogImageSection";
 import BlogReactionSection from "../PostCardComponents/BlogReactionSection";
@@ -15,12 +15,19 @@ interface ArticleCardCommentaryprobs{
 
 const ArticleCardCommentary: React.FC<ArticleCardCommentaryprobs> = ({article}) => {
   const isCognitiveMode = false;
+
+    const [isCommentSectionOpen, setIsCommentSectionOpen] = useState<boolean>(false);
+
+  const openComments = () => setIsCommentSectionOpen(true);
+
+  const closeComments = () => setIsCommentSectionOpen(false);
+
+  const toggleComments = () => setIsCommentSectionOpen(prev => !prev);
   return (
     <div className="w-full max-w-full sm:max-w-6xl mx-auto px-4 sm:px-6 bg-background shadow-sm rounded-md">
       <BlogProfileRepost article={article} />
       <div className="w-full text-[14px] text-neutral-50/90 line-clamp-3 text-ellipsis p-3">
-        Lorem, ipsum repellat quasi inventore dolores? animi officia voluptate
-        distinctio!
+        {article.repost?.repost_comment}
       </div>
       <div className="border border-neutral-500 p-4 rounded-md">
         <BlogProfileNoEllipsis article={article} />
@@ -31,8 +38,8 @@ const ArticleCardCommentary: React.FC<ArticleCardCommentaryprobs> = ({article}) 
       <div className="text-neutral-50 py-4 text-[14px]">4 mins Read</div>
       </div>
 
-      <BlogReactionStats article={article} />
-      <BlogReactionSection article={article} />
+      <BlogReactionStats article={article} openComments={openComments} />
+      <BlogReactionSection  openComments={openComments} article={article} toggleComments={toggleComments} isCommentSectionOpen={isCommentSectionOpen} closeComments={closeComments} />
     </div>
   );
 };

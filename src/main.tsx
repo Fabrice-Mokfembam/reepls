@@ -7,7 +7,8 @@ import { SidebarProvider } from './Context/SidebarContext/SidebarProvider'
 import './i18n';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-  import { UserProvider } from './Context/UserContext/UserProvider';
+import { UserProvider } from './Context/UserContext/UserProvider';
+import { CommentProvider } from './Context/commentcontext/CommentContextProvider.tsx'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -27,7 +28,9 @@ createRoot(document.getElementById('root')!).render(
       <SidebarProvider>
         <QueryClientProvider client={queryClient}>
           <UserProvider>
-            <App />
+            <CommentProvider>
+                  <App />
+            </CommentProvider>
           </UserProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

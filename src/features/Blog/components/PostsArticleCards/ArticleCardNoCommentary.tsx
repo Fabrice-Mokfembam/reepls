@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogMessage from "../PostCardComponents/BlogMessage";
 import BlogImagery from "../PostCardComponents/BlogImageSection";
 import BlogReactionSection from "../PostCardComponents/BlogReactionSection";
@@ -17,6 +17,14 @@ interface ArticleCardprobs{
 
 const ArticleCardNoCommentary: React.FC<ArticleCardprobs> = ({article}) => {
     const isCognitiveMode = false
+
+      const [isCommentSectionOpen, setIsCommentSectionOpen] = useState<boolean>(false);
+
+  const openComments = () => setIsCommentSectionOpen(true);
+
+  const closeComments = () => setIsCommentSectionOpen(false);
+
+  const toggleComments = () => setIsCommentSectionOpen(prev => !prev);
   return (
     <div className="w-full max-w-full  sm:max-w-6xl mx-auto px-4 sm:px-6 bg-background shadow-sm rounded-md">
       <BlogNoCommentaryHeader  article={article}/>
@@ -29,8 +37,13 @@ const ArticleCardNoCommentary: React.FC<ArticleCardprobs> = ({article}) => {
       <div className="text-neutral-50 py-4 text-[14px]">4 mins Read</div>
       </div>
 
-      <BlogReactionStats article={article}/>
-      <BlogReactionSection article={article} />
+      <BlogReactionStats openComments={openComments} article={article}/>
+      <BlogReactionSection 
+      openComments={openComments}
+      closeComments={closeComments}
+      toggleComments={toggleComments}
+      isCommentSectionOpen={isCommentSectionOpen}
+      article={article} />
     </div>
   );
 };

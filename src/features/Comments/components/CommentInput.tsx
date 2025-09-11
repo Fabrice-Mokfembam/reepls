@@ -57,7 +57,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
           </button>
         ) : (
           <button
-            className="ml-2 flex items-center w-40 justify-center gap-2 py-1 text-neutral-50 rounded-md shadow-sm hover:bg-primary-700 transition-colors"
+            className="ml-2 flex items-center md:w-40 justify-center gap-2 py-1 text-neutral-50 rounded-md shadow-sm hover:bg-primary-700 transition-colors"
            onClick={()=>navigate('/auth')}
           >
             <LucideUserCircle size={16} className="text-main-green" />

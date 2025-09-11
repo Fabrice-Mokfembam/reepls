@@ -90,7 +90,7 @@ const BlogReactionStats: React.FC<ArticleProps & { openComments: () => void;} > 
 
       {/* Comment Button */}
        <div
-          className='flex items-center gap-1 group cursor-pointer'
+          className='flex items-center gap-1 group cursor-pointer text-sm'
           onClick={openComments}
         >
           {isLoading ? (

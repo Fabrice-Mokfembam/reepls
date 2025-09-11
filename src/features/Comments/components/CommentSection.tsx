@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CommentInput from "./CommentInput";
 import { LucideX } from "lucide-react";
 import CommentMessage from "./CommentMessage";
@@ -20,6 +20,8 @@ const CommentSection: React.FC<CommentProbs> = ({
     console.log("comments", Comments, "article comments", articleComments);
   }, [Comments, totalComments, articleComments]);
 
+  const [isLevel2Open,setIsLevel2Open] = useState(false);
+
   return (
     <div className="flex flex-col gap-2 py-3 ">
       <div
@@ -29,13 +31,13 @@ const CommentSection: React.FC<CommentProbs> = ({
         <LucideX className="text-neutral-50" />
       </div>
 
-      <CommentInput article={article} />
+   { !isLevel2Open  && <CommentInput article={article} />}
       {isLoading ? (
         <CommentMessageShadow />
       ) : (
         <>
           {Comments.map((comment) => (
-            <CommentMessage key={comment.comment_id} comment={comment} />
+            <CommentMessage key={comment.comment_id} article={article} comment={comment} setIsLevel2Open={setIsLevel2Open} />
           ))}
         </>
       )}

@@ -34,7 +34,7 @@ const CommentSectionLevel2: React.FC<CommentProbs> = ({
       {comments.map((comment:Comment) => (
             <CommentMessageLevel2 key={comment._id} comment={comment} />
           ))}
-           <CommentInputLevel2 commentParentid={commentid} commentArticleid={articleid} />
+          {commentid && <CommentInputLevel2 commentParentid={commentid} commentArticleid={articleid} />}
     </div>
   );
 };

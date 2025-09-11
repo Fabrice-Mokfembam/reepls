@@ -4,14 +4,17 @@ import type { Comment } from '../../../models/datamodels';
 import { timeAgo } from '../../../utils/dateFormater';
 import { useRoute } from '../../../hooks/useRoute';
 
-interface commentprobs{
-    comment:Comment;
+
+
+interface commentprobs {
+    comment: Comment;
 }
 
-const CommentMessageLevel2: React.FC<commentprobs> = ({comment}) => {
+const CommentMessageLevel2: React.FC<commentprobs> = ({ comment }) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const {routeToUseProfile} =useRoute()
+  const { routeToUseProfile } = useRoute();
+ 
 
   // Close the popup if clicking outside
   useEffect(() => {
@@ -37,22 +40,22 @@ const CommentMessageLevel2: React.FC<commentprobs> = ({comment}) => {
         <div className="bg-neutral-700 p-4 rounded-md relative">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-                {comment.author?.profile_picture ? (
-            <img
-              src={comment.author?.profile_picture}
-              alt={comment.author?.username}
-              className="size-6 rounded-full object-cover"
-              onClick={()=>routeToUseProfile(comment.author?.username || '')}
-            />
-          ) : (
-            <div
-              className="size-6 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-[13px]"
-              onClick={()=>routeToUseProfile(comment.author?.username || '')}
-            >
-              {comment.author?.name?.charAt(0)}
-            </div>
-          )}
-              <span onClick={()=>routeToUseProfile(comment.author?.username || '')} className="font-semibold text-[15px] hover:underline cursor-pointer">{comment.author?.name}</span>
+              {comment.author?.profile_picture ? (
+                <img
+                  src={comment.author?.profile_picture}
+                  alt={comment.author?.username}
+                  className="size-6 rounded-full object-cover"
+                  onClick={() => routeToUseProfile(comment.author?.username || '')}
+                />
+              ) : (
+                <div
+                  className="size-6 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-[13px]"
+                  onClick={() => routeToUseProfile(comment.author?.username || '')}
+                >
+                  {comment.author?.name?.charAt(0)}
+                </div>
+              )}
+              <span onClick={() => routeToUseProfile(comment.author?.username || '')} className="font-semibold text-[15px] hover:underline cursor-pointer">{comment.author?.name}</span>
             </div>
             <div className="flex items-center gap-1 relative">
               <span className="text-xs text-neutral-300">{timeAgo(comment?.createdAt?.toString() || '')}</span>

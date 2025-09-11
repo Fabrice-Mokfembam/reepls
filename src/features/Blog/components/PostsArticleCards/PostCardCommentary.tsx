@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogMessage from "../PostCardComponents/BlogMessage";
 import BlogImagery from "../PostCardComponents/BlogImageSection";
 import BlogReactionSection from "../PostCardComponents/BlogReactionSection";
@@ -16,6 +16,15 @@ interface ArticleCardprobs{
 
 const PostCardCommentary: React.FC<ArticleCardprobs> = ({article}) => {
   const isCognitiveMode = false;
+
+    const [isCommentSectionOpen, setIsCommentSectionOpen] = useState<boolean>(false);
+
+  const openComments = () => setIsCommentSectionOpen(true);
+
+  const closeComments = () => setIsCommentSectionOpen(false);
+
+  const toggleComments = () => setIsCommentSectionOpen(prev => !prev);
+
   return (
     <div className="w-full max-w-full sm:max-w-6xl mx-auto px-4 sm:px-6 bg-background shadow-sm rounded-md">
       <BlogProfileRepost article={article} />
@@ -31,8 +40,8 @@ const PostCardCommentary: React.FC<ArticleCardprobs> = ({article}) => {
       {isCognitiveMode && article?.media && <BlogImagery media={article?.media} article={article} />}
       </div>
 
-      <BlogReactionStats article={article} />
-      <BlogReactionSection article={article} />
+      <BlogReactionStats  openComments={openComments} article={article} />
+      <BlogReactionSection article={article} openComments={openComments}  closeComments={closeComments}  toggleComments={toggleComments}  isCommentSectionOpen={isCommentSectionOpen} />
     </div>
   );
 };

@@ -4,13 +4,14 @@ import type { Article } from '../../../../models/datamodels'
 import { timeAgo } from '../../../../utils/dateFormater'
 import { useRoute } from '../../../../hooks/useRoute'
 import { useFollowUser } from '../../../Follow/hooks/useFollowUser'
+import { useGetUserById } from '../../../Profile/hooks/useProfile'
 interface Articleprobs{
   article: Article
 }
 
 const BlogProfileNoEllipsis:React.FC<Articleprobs> = ({article}) => {
 
-    const user = article?.author_id;
+ const {user} = useGetUserById(article?.repost?.repost_user?._id || '')
 
   const { routeToUseProfile } = useRoute();
 
@@ -42,7 +43,7 @@ const BlogProfileNoEllipsis:React.FC<Articleprobs> = ({article}) => {
       <div className="flex items-center gap-3">
           {user?.banner_picture ? (
           <img
-            src={user.banner_picture}
+            src={article.author_id?.profile_picture}
             alt={`${user.username || user.name} avatar`}
             className="w-12 h-12 rounded-full "
           />
