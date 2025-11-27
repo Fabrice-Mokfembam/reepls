@@ -1,0 +1,26 @@
+import React from 'react';
+import { MetricsCards } from '../components/MetricsCards';
+import { EngagementChart } from '../components/EngagementChart';
+import { RecentUsers } from '../components/RecentUsers';
+import { TimePeriodSelector } from '../components/TimePeriodSelector';
+
+export const DashboardPage: React.FC = () => {
+  return (
+    <div className="space-y-6">
+      {/* Time Period Selector */}
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold text-foreground">Dashboard</h2>
+        <TimePeriodSelector />
+      </div>
+
+      {/* Metrics Cards */}
+      <MetricsCards />
+
+      {/* Charts and Recent Users */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <EngagementChart />
+        <RecentUsers />
+      </div>
+    </div>
+  );
+};
