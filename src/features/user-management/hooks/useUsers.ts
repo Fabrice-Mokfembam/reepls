@@ -39,6 +39,21 @@ export const useInfiniteUsers = (filters?: Omit<GetUsersParams, 'page' | 'limit'
 };
 
 /**
+ * Hook to get all users with pagination (non-infinite)
+ * @param params - Query parameters for filtering, sorting, and pagination
+ * @returns Query result with users
+ */
+export const useUsers = (params?: GetUsersParams) => {
+  return useQuery({
+    queryKey: ['users', params] as const,
+    queryFn: () => getAllUsers(params),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+/**
  * Hook to get a single user by ID
  * @param userId - MongoDB ObjectId of the user
  * @param enabled - Whether the query should run (default: true)
