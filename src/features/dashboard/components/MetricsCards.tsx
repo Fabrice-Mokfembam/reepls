@@ -1,33 +1,33 @@
 import React from 'react';
-import { Users, Link, Star, FileText } from 'lucide-react';
+import { Users, FileText, Mic, Radio } from 'lucide-react';
 
 const metrics = [
   {
-    title: 'Number of Users',
-    value: '+2,301',
-    change: '+30% from last month',
+    title: 'Total Users',
+    value: '12,543',
+    change: '+234 new this month',
     icon: Users,
     trend: 'up'
   },
   {
-    title: 'Connections',
-    value: '+10,972',
-    change: '+102% from last month',
-    icon: Link,
-    trend: 'up'
-  },
-  {
-    title: 'Reviews',
-    value: '4.5/300',
-    change: '+10% from last month',
-    icon: Star,
-    trend: 'up'
-  },
-  {
-    title: 'Reports',
-    value: '+93',
-    change: '+10% from last month',
+    title: 'Total Articles',
+    value: '89,432',
+    change: '+1,234 this month',
     icon: FileText,
+    trend: 'up'
+  },
+  {
+    title: 'Total Podcasts',
+    value: '2,341',
+    change: '+89 this month',
+    icon: Mic,
+    trend: 'up'
+  },
+  {
+    title: 'Total Streams',
+    value: '456',
+    change: '+23 this month',
+    icon: Radio,
     trend: 'up'
   }
 ];

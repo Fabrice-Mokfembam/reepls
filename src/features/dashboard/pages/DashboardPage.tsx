@@ -7,9 +7,12 @@ import { TimePeriodSelector } from '../components/TimePeriodSelector';
 export const DashboardPage: React.FC = () => {
   return (
     <div className="space-y-6">
-      {/* Time Period Selector */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold text-foreground">Dashboard</h2>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground">Dashboard</h2>
+          <p className="text-neutral-300 mt-1">Overview of platform statistics and activity</p>
+        </div>
         <TimePeriodSelector />
       </div>
 
